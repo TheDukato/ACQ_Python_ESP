@@ -15,9 +15,9 @@ for i in range(10):
         pinOUT.value(0)
         time.sleep(0.5)
 
-SSID_glob = 'Dom'
-PASSWD_glob = 'nOsadokrople'
-IPDEST_glob = '192.168.0.103'
+SSID_glob = 'FunBox2-F514'
+PASSWD_glob = '2C7DA5646F673E7FA34E3A379A'
+IPDEST_glob = '192.168.0.99'
 Port_glob = 8889
 print("Module are initialized")
 
@@ -36,19 +36,19 @@ while ("_"):
         #Pushing interwal = 21600000 = 6h
         #Pushing interwal = 900000 = 15min = 0,25h
         #Pushing interwal = 1800000 = 30min = 0,5h
-        acqMP.ACQ(SSID_glob,PASSWD_glob,IPDEST_glob,Port_glob,str(bmp.temperature),1,'eco',43200000,0)
+        acqMP.ACQ(IPDEST_glob,Port_glob,str(bmp.temperature),1,'live',43200000)
         pinOUT.value(0)
         time.sleep(0.5)
         pinOUT.value(1)
 
         print("Mes 2")
-        acqMP.ACQ(SSID_glob,PASSWD_glob,IPDEST_glob,Port_glob,str(ds.read_temp(roms[0])),2,'eco',43200000,0)
+        acqMP.ACQ(IPDEST_glob,Port_glob,str(ds.read_temp(roms[0])),2,'eco',21600000)
         pinOUT.value(0)
         time.sleep(0.5)
         pinOUT.value(1)
 
         print("Mes 3")
-        acqMP.ACQ(SSID_glob,PASSWD_glob,IPDEST_glob,Port_glob,str(ds.read_temp(roms[1])),3,'live',43200000,0)
+        acqMP.ACQ(IPDEST_glob,Port_glob,str(ds.read_temp(roms[1])),3,'live',43200000)
         pinOUT.value(0)
         time.sleep(0.5)
         pinOUT.value(1)

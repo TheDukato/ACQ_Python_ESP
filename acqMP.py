@@ -13,6 +13,7 @@ def connWiFi(SSID,PASSWD):
     #Create wlan interface and connect to WiFi network
     sta_if = network.WLAN(network.STA_IF)
     sta_if.active(True)
+    sta_if.connect(SSID,PASSWD)
     while (sta_if.isconnected() =='False'):
         sta_if.connect(SSID,PASSWD)
     try:
@@ -29,6 +30,7 @@ def pushDataViaTCP(IPDEST,PORT,MEASURMENT,ID_Location,timestamp):
     s = socket.socket()
     try:
         s.connect(addr)
+        print(str(MEASURMENT)+","+str(ID_Location)+","+str(timestamp))
         s.send(str(MEASURMENT)+","+str(ID_Location)+","+str(timestamp))
         s.close()
         lastPushData = time.ticks_ms()
@@ -52,7 +54,7 @@ def removeDataFromDB():
     file.close()
     return 0
 #####Acqisition#####
-def ACQ(SSID,PASSWD,IPDEST,PORT,MEASURMENT,ID_Location,MODE,PUSHING_INTERVAL,sendTime):
+def ACQ(IPDEST,PORT,MEASURMENT,ID_Location,MODE,PUSHING_INTERVAL):
     #if connWiFi(SSID,PASSWD) == 0:
     try:
         global lastPushData
